@@ -23,7 +23,17 @@ of complex dependencies).
 
 ## Usage 
 
-First, make sure ImageNet is located/linked to `../imagenet` (alternatively,
+### Dense Checkpoint
+
+First, ensure you have the `.pth` file for the dense checkpoint downloaded.
+
+For example, to download the **ResNet-50 checkpoint pretrained on ImageNet-1K**, run:
+
+```bash
+wget https://download.pytorch.org/models/resnet50-0676ba61.pth
+```
+
+Then, make sure ImageNet is located/linked to `../imagenet` (alternatively,
 you can specifiy the `--datapath` argument for all commands).
 
 ### Applying OBC
