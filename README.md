@@ -98,6 +98,28 @@ python database.py rn18 imagenet mixed loss
 python spdy.py rn18 imagenet 8 mixed --dp
 python postproc.py rn18 imagenet rn18_mixed_800x_dp.txt --database mixed --bnt
 ```
+## Verification
+
+After applying your optimizations, you can verify the sparsity and ImageNet validation accuracy of your pruned ResNet-50 models using the provided verification utility.
+
+### Usage
+
+```bash
+python verify_sparse_accuracy.py --ckpt <path_to_checkpoint> --datapath <path_to_imagenet>
+```
+# Verify a pruned ResNet-50 model
+python verify_sparse_accuracy.py \
+       --ckpt rn50_24.pth \
+       --datapath ../imagenet
+
+# Verify with custom batch size and workers
+python verify_sparse_accuracy.py \
+       --ckpt rn50_unstr_75sparse.pth \
+       --datapath ../imagenet \
+       --batch 128 \
+       --workers 8
+      
+Note: This verification utility currently supports ResNet-50 models only.
 
 # How to Download ImageNet-1K from imagenet_utils
 
