@@ -123,7 +123,7 @@ Note: This verification utility currently supports ResNet-50 models only.
 
 # How to Download ImageNet-1K from imagenet_utils
 
-This explains how to download & process ImageNet-1K train/val dataset for using as a dataset. Due to legal restrictions, ImageNet-1K cannot be downloaded automatically by script and must be obtained manually. The method below outlines the fastest and most time-efficient way to prepare the dataset. Please note that processing and extraction can take approximately 2–4 hours.
+This explains how to download & process ImageNet-1K train/val dataset for using as a dataset. Due to legal restrictions, ImageNet-1K cannot be downloaded automatically by script and must be obtained manually. The method below outlines, to our best knowledge, the fastest and most time-efficient way to prepare the dataset. Please note that processing and extraction can take approximately 2–4 hours.
 
 
 ## 1. Data Download
