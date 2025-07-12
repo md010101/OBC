@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """verify_sparse_accuracy.py
 
-Quick utility to check overall weight sparsity and ImageNet validation
+Quick ground truth utility to check overall weight sparsity and ImageNet validation
 accuracy of a ResNet-50 checkpoint produced by the OBC pipeline.
 
 Example
