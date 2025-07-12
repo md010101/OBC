@@ -23,7 +23,17 @@ of complex dependencies).
 
 ## Usage 
 
-First, make sure ImageNet is located/linked to `../imagenet` (alternatively,
+### Dense Checkpoint
+
+First, ensure you have the `.pth` file for the dense checkpoint downloaded.
+
+For example, to download the **ResNet-50 checkpoint pretrained on ImageNet-1K**, run:
+
+```bash
+wget https://download.pytorch.org/models/resnet50-0676ba61.pth
+```
+
+Then, make sure ImageNet is located/linked to `../imagenet` (alternatively,
 you can specifiy the `--datapath` argument for all commands).
 
 ### Applying OBC
@@ -88,10 +98,32 @@ python database.py rn18 imagenet mixed loss
 python spdy.py rn18 imagenet 8 mixed --dp
 python postproc.py rn18 imagenet rn18_mixed_800x_dp.txt --database mixed --bnt
 ```
+## Verification
+
+After applying your optimizations, you can verify the sparsity and ImageNet validation accuracy of your pruned ResNet-50 models using the provided verification utility.
+
+### Usage
+
+```bash
+python verify_sparse_accuracy.py --ckpt <path_to_checkpoint> --datapath <path_to_imagenet>
+```
+# Verify a pruned ResNet-50 model
+python verify_sparse_accuracy.py \
+       --ckpt rn50_24.pth \
+       --datapath ../imagenet
+
+# Verify with custom batch size and workers
+python verify_sparse_accuracy.py \
+       --ckpt rn50_unstr_75sparse.pth \
+       --datapath ../imagenet \
+       --batch 128 \
+       --workers 8
+      
+Note: This verification utility currently supports ResNet-50 models only.
 
 # How to Download ImageNet-1K from imagenet_utils
 
-This explains how to download & process ImageNet-1K train/val dataset for using as a dataset. Due to legal restrictions, ImageNet-1K cannot be downloaded automatically by script and must be obtained manually. The method below outlines the fastest and most time-efficient way to prepare the dataset. Please note that processing and extraction can take approximately 2–4 hours.
+This explains how to download & process ImageNet-1K train/val dataset for using as a dataset. Due to legal restrictions, ImageNet-1K cannot be downloaded automatically by script and must be obtained manually. The method below outlines, to our best knowledge, the fastest and most time-efficient way to prepare the dataset. Please note that processing and extraction can take approximately 2–4 hours.
 
 
 ## 1. Data Download
