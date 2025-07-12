@@ -9,6 +9,7 @@ from datautils import *
 from modelutils import *
 from quant import *
 from trueobs import *
+import maskutils as mu
 
 
 parser = argparse.ArgumentParser()
@@ -22,6 +23,8 @@ parser.add_argument('--load', type=str, default='')
 parser.add_argument('--datapath', type=str, default='')
 parser.add_argument('--seed', type=int, default=0)
 parser.add_argument('--save', type=str, default='')
+parser.add_argument('--export-mask', type=str, default='')
+parser.add_argument('--snows-format', action='store_true', help='Export masks in SNOWS-compatible format (flat structure, conv-only)')
 
 parser.add_argument('--nsamples', type=int, default=1024)
 parser.add_argument('--batchsize', type=int, default=-1)
@@ -157,6 +160,17 @@ if not (args.compress == 'quant' and not wquant):
         trueobs[name].free()
 
 if sparse:
+    # --- Export masks for SNOWS if requested ---
+    if args.export_mask:
+        for sparsity in sparsities:
+            if args.snows_format:
+                mask_dict = mu.generate_snows_mask_dict_from_state_dict(sds[sparsity], modelp)
+                filename = '%s_%04d_mask.pth' % (args.model, int(sparsity * 10000))
+                mu.save_snows_mask_flat(mask_dict, os.path.join(args.export_mask, filename))
+            else:
+                mask_dict = mu.generate_mask_dict_from_state_dict(sds[sparsity])
+                filename = '%s_%04d_mask.pth' % (args.model, int(sparsity * 10000))
+                mu.save_snows_mask(mask_dict, os.path.join(args.export_mask, filename))
     if args.sparse_dir:
         for sparsity in sparsities:
             name = '%s_%04d.pth' % (args.model, int(sparsity * 10000))
@@ -179,5 +193,16 @@ if aquant:
 
 if args.save:
     torch.save(modelp.state_dict(), args.save)
+
+# After potential pruning/quant and before final save/exit
+if args.export_mask and not sparse:
+    if args.snows_format:
+        mask_dict = mu.generate_snows_mask_dict_from_model(modelp)
+        fname = '%s_mask.pth' % (args.model)
+        mu.save_snows_mask_flat(mask_dict, os.path.join(args.export_mask, fname))
+    else:
+        mask_dict = mu.generate_mask_dict_from_model(modelp)
+        fname = '%s_mask.pth' % (args.model)
+        mu.save_snows_mask(mask_dict, os.path.join(args.export_mask, fname))
 
 test(modelp, testloader)
