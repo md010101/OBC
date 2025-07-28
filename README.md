@@ -22,6 +22,28 @@ NOTE: The code as provided here only fully supports torchvision ResNet variants
 (the full integration of YOLO and BERT models is omitted due to large amounts
 of complex dependencies).
 
+## Installation
+
+It is recommended to work inside a fresh virtual environment so the
+compression utilities do not interfere with your system Python.
+
+```bash
+# (optional) create and activate a virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
+
+# install all Python dependencies listed in this snapshot
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+Make sure the wheel you pick for `torch` / `torchvision` matches the CUDA
+version available on your system.  The provided `requirements.txt` was
+captured from an environment using the CUDA 12 wheels shipped by PyTorch.  If
+you require a different CUDA version (or a CPU-only build), install the
+appropriate `torch` and `torchvision` wheels first, then run the command above
+and pip will reconcile the remaining dependencies automatically.
+
 ## Usage 
 
 ### Dense Checkpoint
