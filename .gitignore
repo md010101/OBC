@@ -5,3 +5,12 @@ bertsquad/__pycache__
 
 temp/
 datasets/
+temp_test/
+temp_test2/
+temp_test3/
+temp_test4/
+temp_test5/
+7_13_runs/
+pruned.pth
+resnet50-0676ba61.pth
+rn50_14_75sparse.pth
