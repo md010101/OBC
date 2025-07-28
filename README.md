@@ -224,3 +224,26 @@ This explains how to download & process ImageNet-1K train/val dataset for using 
 <img width="350" alt="image" src="https://user-images.githubusercontent.com/49643709/163708613-da5fd5e3-2ab2-442a-8028-b9ef20ad7880.png">
 
 ---
+
+## Local-Only Artifacts (Ignored From Git)
+
+The following files and directories are present in a typical working copy but are **not** tracked in the GitHub repo.  
+They are either large datasets, temporary experiment outputs, or compiled/cache files that would bloat the repository.
+
+| Path | Contents / Structure | Purpose |
+|------|----------------------|---------|
+| `datasets/imagenet/` | • `train/` – 1,000 class folders<br>• `val/` – 50,000 validation JPGs in class-label sub-dirs | Full ImageNet-1K dataset used for training & evaluation. |
+| `temp/` | • `ILSVRC2012_img_train.tar` (138 GB)<br>• `ILSVRC2012_img_val.tar` (6.3 GB) | Original ImageNet tarballs kept for extraction / checksum verification. |
+| `7_13_runs/` | • `rn50_34.pth`<br>• `rn50_mask.pth` | Model checkpoints produced during the 13 July training run. |
+| `temp_test/` | • `rn50_mask.pth` | Quick smoke-test checkpoint (single file). |
+| `temp_test2/` | • `rn50_34.pth`<br>• `rn50_34_snows.pth`<br>• `rn50_snows_mask.pth` | Checkpoints from “snow-corruption” ablation tests. |
+| `temp_test3/` | • `rn50_mask.pth` | Mask-only checkpoint variant (another small test). |
+| `temp_test4/` | • `rn50_mask.pth` | Same as above—kept for separate hyper-param sweep. |
+| `temp_test5/` | • `rn50_34.pth`<br>• `rn50_mask.pth` | Final dual-checkpoint combo used for ensemble analysis. |
+| `pruned.pth` | 60 MB pruned ResNet-50 weights used for speed baselines. |
+| `resnet50-0676ba61.pth` | Official torchvision ResNet-50 pretrained weights (97 MB). |
+| `rn50_14_75sparse.pth` | 75 %-sparse (14×-smaller) checkpoint for compression comparisons. |
+| `__pycache__/` | Compiled `.pyc` files generated at runtime. | Safe to delete—regenerated automatically. |
+
+> **Snapshot Date**: _2025-07-28_  
+> This table reflects the current state of the working directory; if new local artifacts appear, update this section accordingly.
