@@ -1,7 +1,8 @@
-# Optimal Brain Compression
+## OBC Wisp-implementation README
 
-This repository contains efficient implementations of ExactOBS for quantization,
-unstructured-, block- and N:M pruning, introduced in the NeurIPS 2022 paper 
+This repository contains the wisp-compatible implementations for OBC. 
+
+Based on the NeurIPS 2022 paper 
 "Optimal Brain Compression: A Framework for Accurate Post-Training Quantization 
 and Pruning".
 
